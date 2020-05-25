@@ -1,9 +1,9 @@
-import { CHECK_SIGN_IN, GET_USERS } from "./types";
+import {CHECK_SIGN_IN, GET_USERS} from './types';
 
-export const checkSignIn = ({ email, password }) => {
+export const checkSignIn = ({email, password}) => {
   return {
     type: CHECK_SIGN_IN,
-    payload: { email, password }
+    payload: {email, password}
   };
 };
 

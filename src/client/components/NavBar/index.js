@@ -1,5 +1,5 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react';
+import './styles.scss';
 class NavBar extends React.Component {
   render() {
     return (
@@ -12,7 +12,7 @@ class NavBar extends React.Component {
             class="d-inline-block align-top"
             alt=""
           />
-          company-2020
+          Gerald
         </a>
       </nav>
     );

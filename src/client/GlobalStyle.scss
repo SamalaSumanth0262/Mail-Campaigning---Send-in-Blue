@@ -1,5 +1,22 @@
+@import '../client/assets/variables';
+
+html, body{
+  background: $gray;
+}
 .Toastify__toast--success {
   background: #553d7b !important;
   border-radius: 5px;
   padding: 1rem;
+}
+
+.grey-bg {
+  
+}
+
+.white-bg {
+  background-color: $bright;
+}
+
+.br-5 {
+  border-radius: 5px;
 }

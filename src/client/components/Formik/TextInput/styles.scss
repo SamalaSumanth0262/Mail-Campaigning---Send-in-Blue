@@ -1,9 +1,11 @@
 
 input {
-  border-radius: 3px;
   width: inherit;
   border: 1px solid lightgray;
   height: 40px;
+  padding-left: 0.5rem;
+  font-size: 12px;
+  outline: none;
 }
 label {
   width: 100%;
@@ -17,8 +19,13 @@ label {
 .error-text {
   color: #f41e00;
   margin-bottom: 10px;
+  font-size: 10px;
 }
 
 .text-mandatory {
     color: #f41e00;
+}
+input::placeholder {
+  padding-left: 1rem;
+  font-size: 10px;
 }

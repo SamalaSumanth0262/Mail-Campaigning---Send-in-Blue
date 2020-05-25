@@ -1,16 +1,23 @@
+@import '../../../assets//variables';
+button {
+  outline: none !important;
+}
 .btn-primary {
-  background-color: #553d7b; //TO_DO: should be derived from colo palatte
-  border: 2px solid #7a57b3;
+  background-color: $green; //TO_DO: should be derived from colo palatte
+  border: 2px solid $green;
+  border-radius: 0px;
+  outline: none;
   &:hover {
-    color: #553d7b;
+    color: $green;
     background: white;
-    border: 2px solid #7a57b3;
+    border: 2px solid $green;
   }
 }
 
 .red-button {
   background-color: #e63662; //TO_DO: should be derived from colo palatte
   border: 2px solid #e90a28;
+  border-radius: 0px;
   &:hover {
     color: #e63662;
     background: white;

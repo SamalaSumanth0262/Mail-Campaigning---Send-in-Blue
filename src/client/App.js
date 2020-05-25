@@ -1,7 +1,7 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
-import { Provider } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
+import {hot} from 'react-hot-loader';
+import {Provider} from 'react-redux';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import store from './store';
 import MainContainer from './containers/MainContainer';
