@@ -9,8 +9,7 @@ import {toast} from 'react-toastify';
 // Add a request interceptor
 axios.interceptors.request.use(
   async (config) => {
-    config.headers['api-key'] =
-      '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';
+    config.headers['api-key'] = '';
 
     return config;
   },
