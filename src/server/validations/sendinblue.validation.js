@@ -4,7 +4,7 @@ module.exports = {
   createMailerList: {
     body: {
       listName: commonValidations.stringRequired,
-      folderId: commonValidations.emailRequired,
+      folderId: commonValidations.numberRequired,
       fileUrl: commonValidations.stringRequired
     }
   }

@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import TextInput from '../Formik/TextInput';
 import Button from '../common/Button';
+import {createMailList} from './client';
+import {toast} from 'react-toastify';
 const mailSchema = Yup.object().shape({
   fileUrl: Yup.string().required('Link is Required'),
   listName: Yup.string().required('Mail list name is Required'),
@@ -18,13 +20,16 @@ class CreateMailList extends React.Component {
       folderId: ''
     }
   };
-  handleSubmitForm(values, props) {
-    console.log('CreateMailList -> handleSubmitForm -> values', values);
+  async handleSubmitForm({values, actions}) {
+    actions.setSubmitting(true);
+    var result = await createMailList(values);
+    actions.setSubmitting(false);
+    actions.resetForm();
+    toast.success('Mailer List Created Successfully..');
   }
 
   render() {
     const renderView = (props) => {
-      console.log('CreateMailList -> renderView -> props', props);
       return (
         <form onSubmit={props.handleSubmit}>
           <div className="p-2 pt-3">
@@ -52,8 +57,8 @@ class CreateMailList extends React.Component {
                   isMandatory={true}
                 />
               </div>
-              <div className="offset-md-3 col-sm-2">
-                <Button type="submit" text="Create Mail List" isLoading={props} />
+              <div className="offset-md-3 col-sm-3">
+                <Button type="submit" text="Create Mail List" isSpinning={props.isSubmitting} />
               </div>
             </div>
           </div>
@@ -65,8 +70,9 @@ class CreateMailList extends React.Component {
         initialValues={this.state.initialValues}
         render={renderView}
         validationSchema={mailSchema}
-        onSubmit={(values, props) => {
-          this.handleSubmitForm(values, props);
+        onSubmit={(values, actions) => {
+          console.log('CreateMailList -> render -> actions', actions);
+          this.handleSubmitForm({values, actions});
         }}
       />
     );
