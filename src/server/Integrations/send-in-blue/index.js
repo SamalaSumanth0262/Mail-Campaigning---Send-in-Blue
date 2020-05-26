@@ -1,20 +1,22 @@
 const axios = require('axios');
 const setMailerList = async ({listName, folderId, fileUrl}) => {
-  try {
-    var data = {};
-    data['newList'] = {listName, folderId};
-    data['fileUrl'] = fileUrl;
-    data['emailBlacklist'] = false; //TO_DO hard coded looose end
-    data['updateExistingContacts'] = true;
-    data['smsBlacklist'] = false;
-    data['emptyContactsAttributes'] = false;
-    const result = await axios.post(`https://api.sendinblue.com/v3/contacts/import`, data);
-    return result.data;
-  } catch (err) {
-    console.log('setMailerList -> err', err);
-    return err;
-    //TO_DO handle
-  }
+  return new Promise(async (resolve, reject) => {
+    try {
+      var result = await axios.post(`https://api.sendinblue.com/v3/contacts/import`, {
+        newList: {listName: listName, folderId: folderId},
+        emailBlacklist: false,
+        smsBlacklist: false,
+        updateExistingContacts: true,
+        emptyContactsAttributes: false,
+        fileUrl: fileUrl
+      });
+      return resolve(result);
+    } catch (err) {
+      console.log('setMailerList -> err', err);
+      return reject(err);
+      // Loose End
+    }
+  });
 };
 
 module.exports = {

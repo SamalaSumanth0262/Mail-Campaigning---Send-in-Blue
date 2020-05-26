@@ -1,6 +1,6 @@
 const authValidation = require('./auth.validation');
-// const sendInBlueValidation = require('./sendinblue.validaiton');
+const sendInBlueValidation = require('./sendinblue.validation');
 module.exports = {
-  authValidation
-  // sendInBlueValidation
+  authValidation,
+  sendInBlueValidation
 };

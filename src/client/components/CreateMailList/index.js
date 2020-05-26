@@ -24,6 +24,7 @@ class CreateMailList extends React.Component {
 
   render() {
     const renderView = (props) => {
+      console.log('CreateMailList -> renderView -> props', props);
       return (
         <form onSubmit={props.handleSubmit}>
           <div className="p-2 pt-3">
@@ -52,7 +53,7 @@ class CreateMailList extends React.Component {
                 />
               </div>
               <div className="offset-md-3 col-sm-2">
-                <Button type="submit" text="Create Mail List" />
+                <Button type="submit" text="Create Mail List" isLoading={props} />
               </div>
             </div>
           </div>

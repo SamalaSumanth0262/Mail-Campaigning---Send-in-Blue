@@ -23,6 +23,10 @@ router.post('/auth/login', validate(authValidation.loginUser), ...middleware, au
 
 //Send In Blue Requests
 
-router.post('/sendinblue/create_mail_list', sendInBlueController.createMailerList);
+router.post(
+  '/sendinblue/create_mail_list',
+  validate(sendInBlueValidation.createMailerList),
+  sendInBlueController.createMailerList
+);
 
 module.exports = router;

@@ -1,11 +1,13 @@
-const Joi = require("joi");
-const { OBJECTID_REGEX } = require("./../constants");
+const Joi = require('joi');
+const {OBJECTID_REGEX} = require('./../constants');
 
 const commonValidations = {
   stringRequired: Joi.string().required(),
   stringOptional: Joi.string().optional(),
   booleanRequired: Joi.boolean().required(),
   booleanOptional: Joi.boolean().optional(),
+  numberRequired: Joi.number().required(),
+  numberOptional: Joi.number().optional(),
   arrayRequired: Joi.array().required(),
   arrayOptional: Joi.array().optional(),
   objectIdRequired: Joi.string()
@@ -15,16 +17,12 @@ const commonValidations = {
     .regex(OBJECTID_REGEX)
     .optional(),
   dateRequired: Joi.date().required(),
-  dateOptional: Joi.alternatives().try(
-    Joi.date(),
-    Joi.allow(null),
-    Joi.optional()
-  ),
-  minRequired: value =>
+  dateOptional: Joi.alternatives().try(Joi.date(), Joi.allow(null), Joi.optional()),
+  minRequired: (value) =>
     Joi.number()
       .min(value)
       .required(),
-  minOptional: value =>
+  minOptional: (value) =>
     Joi.number()
       .min(value)
       .optional(),

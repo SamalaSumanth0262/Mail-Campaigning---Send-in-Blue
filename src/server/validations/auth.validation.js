@@ -1,4 +1,4 @@
-const { commonValidations } = require("./common.validation");
+const {commonValidations} = require('./common.validation');
 module.exports = {
   //TO_DO: write validation for form - data
   registerUser: {
