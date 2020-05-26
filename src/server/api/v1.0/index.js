@@ -1,33 +1,28 @@
-var express = require("express");
-const validate = require("express-validation");
-const { formatResponse } = require("../../utlis/helper");
+var express = require('express');
+const validate = require('express-validation');
+const {formatResponse} = require('../../utlis/helper');
+const axios = require('axios');
+axios.defaults.headers.post['api-key'] =
+  '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'; //TO_DO: get this from production.json // for POST requests
 
 var router = express.Router();
 
 // API VALIDATIONS
-const { authValidation } = require("../../validations");
+const {authValidation, sendInBlueValidation} = require('../../validations');
 
 //CONTROLLERS
-const { authController } = require("../../controllers");
+const {authController, sendInBlueController} = require('../../controllers');
 
-const { decideUserRole } = require("../../middlewares/auth");
+const {decideUserRole} = require('../../middlewares/auth');
 
 // add n number of middlewares // can be checked for authentication // lot more abilities
 const middleware = [decideUserRole];
-router.post(
-  "/auth/registerUser",
-  validate(authValidation.registerUser),
-  authController.registerUser
-);
+router.post('/auth/registerUser', validate(authValidation.registerUser), authController.registerUser);
 
-router.post(
-  "/auth/login",
-  validate(authValidation.loginUser),
-  ...middleware,
-  authController.loginUser
-);
+router.post('/auth/login', validate(authValidation.loginUser), ...middleware, authController.loginUser);
 
-router.all("*", function(req, res, next) {
-  res.status(404).json(formatResponse(404, "Invalid Request"));
-});
+//Send In Blue Requests
+
+router.post('/sendinblue/create_mail_list', sendInBlueController.createMailerList);
+
 module.exports = router;

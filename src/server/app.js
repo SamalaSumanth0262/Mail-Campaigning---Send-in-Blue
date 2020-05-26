@@ -10,7 +10,7 @@ const {formatResponse} = require('../server/utlis/helper');
 const {ERROR_MESSAGES, CSRF_ERROR_CODE} = require('./constants');
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-function onUnhandledError(err) { 
+function onUnhandledError(err) {
   try {
     logger.error(err);
   } catch (e) {
@@ -23,13 +23,10 @@ function onUnhandledError(err) {
 process.on('unhandledRejection', onUnhandledError);
 process.on('uncaughtException', onUnhandledError);
 
-const setupAppRoutes = process.env.NODE_ENV === 'development' ? require('./middlewares/development') : require('./middlewares/production');
-
-console.log("setupAppRoutes", setupAppRoutes)
-
+const setupAppRoutes =
+  process.env.NODE_ENV === 'development' ? require('./middlewares/development') : require('./middlewares/production');
 
 const app = express();
-
 
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
@@ -60,8 +57,6 @@ app.use(cors(corsOptions));
 app.disable('x-powered-by');
 
 app.use(bodyParser.json());
-
-console.log("approutes", approutes)
 
 app.use(approutes);
 

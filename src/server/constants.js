@@ -12,11 +12,6 @@ const ERROR_MESSAGES = {
 //extra care to be taken while adding roles,
 //this string should be same as mongoDB stored role
 
-const ROLE = {
-  INVESTOR: 'investor',
-  ADMIN: 'admin'
-};
-
 const CSRF_ERROR_CODE = 'EBADCSRFTOKEN';
 
 const UPDATED_SUCCESS = {
@@ -30,6 +25,5 @@ module.exports = {
   ERROR_MESSAGES,
   CSRF_ERROR_CODE,
   UPDATED_SUCCESS,
-  REMOVED_SUCCESS,
-  ROLE
+  REMOVED_SUCCESS
 };
