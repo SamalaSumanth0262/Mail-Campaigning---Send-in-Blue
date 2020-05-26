@@ -4,6 +4,7 @@ import {getUsers} from '../../Actions/ActivityActions';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import CreateMailList from '../CreateMailList';
+import CreateCampaign from '../CreateCampaign';
 class DashBoard extends React.Component {
   state = {
     users: []
@@ -26,17 +27,8 @@ class DashBoard extends React.Component {
             <Tab eventKey="create_mail_list" title="1. Create Mail List">
               <CreateMailList />
             </Tab>
-            <Tab eventKey="create_campaign" title="2. Create Campaign">
-              2
-            </Tab>
-            <Tab eventKey="select_mail_list" title="3. Select Mail List">
-              3
-            </Tab>
-            <Tab eventKey="template" title="4. Set Template">
-              4
-            </Tab>
-            <Tab eventKey="schedule" title="5. Schedule A Campaign">
-              5
+            <Tab eventKey="create_campaign" title="2. Create Campaign & Schedule">
+              <CreateCampaign />
             </Tab>
           </Tabs>
         </div>
