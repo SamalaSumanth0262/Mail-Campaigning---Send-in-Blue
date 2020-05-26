@@ -19,6 +19,21 @@ const setMailerList = async ({listName, folderId, fileUrl}) => {
   });
 };
 
+const getAllMailerList = async () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      //TO_DO limit and offset should not be hardcoded
+      var result = await axios.get('https://api.sendinblue.com/v3/contacts/lists?limit=30&offset=0');
+      return resolve(result);
+    } catch (err) {
+      console.log('setMailerList -> err', err);
+      return reject(err);
+      // Loose End
+    }
+  });
+};
+
 module.exports = {
-  setMailerList
+  setMailerList,
+  getAllMailerList
 };

@@ -3,6 +3,8 @@ const validate = require('express-validation');
 const {formatResponse} = require('../../utlis/helper');
 const axios = require('axios');
 axios.defaults.headers.post['api-key'] =
+  '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';
+axios.defaults.headers.get['api-key'] =
   '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'; //TO_DO: get this from production.json // for POST requests
 
 var router = express.Router();
@@ -28,5 +30,7 @@ router.post(
   validate(sendInBlueValidation.createMailerList),
   sendInBlueController.createMailerList
 );
+
+router.get('/sendinblue/get_all_list', sendInBlueController.getAllList);
 
 module.exports = router;

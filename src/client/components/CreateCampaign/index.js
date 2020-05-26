@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import TextInput from '../Formik/TextInput';
 import Button from '../common/Button';
-import {createMailList} from './client';
+import {getAllMailerList} from './client';
 import {toast} from 'react-toastify';
 
 import DropDown from '../Formik/DropDown';
@@ -25,11 +25,32 @@ class CreateCampaign extends React.Component {
       subject: '',
       replyTo: '',
       scheduledAt: ''
-    }
+    },
+    isMailerListLoading: true,
+    mailerListData: []
   };
+
+  async componentDidMount() {
+    try {
+      var mailer_list = await getAllMailerList();
+      var data = mailer_list.data.data.lists; //TO_DO no time to handle this properly // handing with try catch
+      console.log('CreateCampaign -> componentDidMount -> data', data);
+      var mailerListData = [];
+      data.map((list) => {
+        var obj = {};
+        (obj['label'] = list.name), (obj['value'] = list.id);
+        mailerListData.push(obj);
+      });
+      this.setState({mailerListData});
+    } catch (err) {
+      alert(err);
+      console.log('CreateCampaign -> componentDidMount -> err', err);
+      //loose end
+    }
+  }
   async handleSubmitForm({values, actions}) {
     actions.setSubmitting(true);
-    var result = await createMailList(values);
+    // var result = await createMailList(values);
     actions.setSubmitting(false);
     actions.resetForm();
     toast.success('Mailer List Created Successfully..');
@@ -59,7 +80,7 @@ class CreateCampaign extends React.Component {
                 <DropDown
                   split={false}
                   labelTitle="Select the Mailer List"
-                  option={[{label: 'check one', value: 'ch'}]}
+                  option={this.state.mailerListData}
                   labelName="listIds"
                   isMandatory={true}
                   style={{marginBottom: '10px'}}
