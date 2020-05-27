@@ -2,9 +2,10 @@
 const isEmpty = require('../utlis/isEmpty');
 var slugify = require('slugify');
 const formatResponse = (status = 500, err = '', data = [], errors = []) => {
+  console.log('formatResponse -> err', err);
   return {
     status,
-    message: err && err.message ? err.message : err,
+    message: err && err.response && err.response.data ? err.response.data : err,
     data,
     errors
   };

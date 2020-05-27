@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, ErrorMessage } from 'formik';
+import {Field, ErrorMessage} from 'formik';
 import PropTypes from 'prop-types';
 import './styles.scss';
 import Select from 'react-select';
@@ -20,8 +20,8 @@ const customStyles = {
 
 const CustomReactSelect = (props) => {
   let {
-    form: { setFieldValue, setFieldTouched },
-    field: { name, value },
+    form: {setFieldValue, setFieldTouched},
+    field: {name, value},
     placeholder,
     option
   } = props;
@@ -43,9 +43,9 @@ const CustomReactSelect = (props) => {
 };
 
 const DropDown = (props) => {
-  const { labelFor, labelTitle, isMandatory, disabled, labelName, placeholder, option } = props;
+  const {labelFor, labelTitle, isMandatory, disabled, labelName, placeholder, option} = props;
   return (
-    <div >
+    <div>
       <label for={labelFor}>
         {renderHtml(labelTitle)} {isMandatory ? <span className="text-mandatory">*</span> : ''}
       </label>

@@ -1,12 +1,21 @@
-.esop-select-group{
+
   select{
     font-size: 12px;
     background-color: #eceeef;
-    width: 191px;
     height: 38px;
     border-radius: 4px;
     border: solid 1px #cccccc;
     background-color: #ffffff;
     margin-top:8px;
   }
+
+
+.error-text {
+  color: #f41e00;
+  margin-bottom: 10px;
+  font-size: 10px;
+}
+
+.text-mandatory {
+    color: #f41e00;
 }

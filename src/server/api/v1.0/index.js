@@ -32,5 +32,10 @@ router.post(
 );
 
 router.get('/sendinblue/get_all_list', sendInBlueController.getAllList);
+router.post(
+  '/sendinblue/create_campaign',
+  validate(sendInBlueValidation.createCampaign),
+  sendInBlueController.createCampaign
+);
 
 module.exports = router;

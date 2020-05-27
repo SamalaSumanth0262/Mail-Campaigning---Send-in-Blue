@@ -4,15 +4,23 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import TextInput from '../Formik/TextInput';
 import Button from '../common/Button';
-import {getAllMailerList} from './client';
+import {getAllMailerList, createCampaign} from './client';
 import {toast} from 'react-toastify';
-
 import DropDown from '../Formik/DropDown';
 import CkEditor from '../Formik/CkEditor';
 const campaignSchema = Yup.object().shape({
-  fileUrl: Yup.string().required('Link is Required'),
-  listName: Yup.string().required('Mail list name is Required'),
-  folderId: Yup.number('Folder ID cannot be a text..').required('Folder Id is required')
+  name: Yup.string().required('Sender name is required'),
+  email: Yup.string()
+    .email('Please enter the correct email')
+    .required('Sender email cannot be blank'),
+  listIds: Yup.object().required('Please select the mailer list'),
+  campaign_name: Yup.string().required('Campaign name is required'),
+  subject: Yup.string().required('Subject of email is required'),
+  replyTo: Yup.string()
+    .email('Please enter the correct email')
+    .required('ReplyTo cannot be blank'),
+  scheduledAt: Yup.string().required('Sender name is required'),
+  htmlContent: Yup.string().required('Email template is required')
 });
 
 class CreateCampaign extends React.Component {
@@ -24,7 +32,8 @@ class CreateCampaign extends React.Component {
       campaign_name: '',
       subject: '',
       replyTo: '',
-      scheduledAt: ''
+      scheduledAt: '',
+      htmlContent: '<p>Welcome to Gerald Email Campaigning</p>'
     },
     isMailerListLoading: true,
     mailerListData: []
@@ -34,7 +43,7 @@ class CreateCampaign extends React.Component {
     try {
       var mailer_list = await getAllMailerList();
       var data = mailer_list.data.data.lists; //TO_DO no time to handle this properly // handing with try catch
-      console.log('CreateCampaign -> componentDidMount -> data', data);
+      //TO_DO: write in a separate function
       var mailerListData = [];
       data.map((list) => {
         var obj = {};
@@ -50,14 +59,16 @@ class CreateCampaign extends React.Component {
   }
   async handleSubmitForm({values, actions}) {
     actions.setSubmitting(true);
-    // var result = await createMailList(values);
+    var result = await createCampaign(values);
+    console.log('CreateCampaign -> handleSubmitForm -> result', result);
     actions.setSubmitting(false);
     actions.resetForm();
-    toast.success('Mailer List Created Successfully..');
+    toast.success('Campaign Created & Scheduled Successfully..');
   }
 
   render() {
     const renderView = (props) => {
+      console.log('renderView -> props', props);
       return (
         <form onSubmit={props.handleSubmit}>
           <div className="p-2 pt-3">
@@ -113,10 +124,11 @@ class CreateCampaign extends React.Component {
                   placeholder=""
                   labelTitle="Schedule the campaign"
                   isMandatory={true}
+                  data-date-format="DD-MM-YYYY HH:mm:ss"
                 />
               </div>
               <div className="offset-md-3 col-sm-3">
-                <Button type="submit" text="Create Campaign & schedule" isSpinning={props.isSubmitting} />
+                <Button type="submit" text="Create Campaign" isSpinning={props.isSubmitting} />
               </div>
             </div>
           </div>
@@ -129,7 +141,6 @@ class CreateCampaign extends React.Component {
         render={renderView}
         validationSchema={campaignSchema}
         onSubmit={(values, actions) => {
-          console.log('CreateMailList -> render -> actions', actions);
           this.handleSubmitForm({values, actions});
         }}
       />

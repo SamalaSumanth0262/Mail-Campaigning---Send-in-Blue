@@ -25,8 +25,22 @@ axios.interceptors.response.use(
     return response;
   },
   async (error) => {
+    console.log('error', error);
     // handleGlobalError(error);
-    toast.error(error.message);
+
+    //TO_DO: refractor this method
+    if (
+      error &&
+      error.response &&
+      error.response.data &&
+      error.response.data.message &&
+      error.response.data.message.message
+    ) {
+      toast.error(error.response.data.message.message);
+    } else {
+      toast.error(error.message);
+    }
+
     return Promise.reject(error);
   }
 );

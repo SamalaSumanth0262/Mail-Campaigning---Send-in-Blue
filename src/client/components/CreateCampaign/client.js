@@ -9,4 +9,13 @@ const getAllMailerList = async () => {
   }
 };
 
-export {getAllMailerList};
+const createCampaign = async (values) => {
+  try {
+    return await axios.post(`/api/v1.0/sendinblue/create_campaign`, values);
+  } catch (err) {
+    console.log('createCampaign -> err', err);
+    return err;
+  }
+};
+
+export {getAllMailerList, createCampaign};

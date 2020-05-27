@@ -33,7 +33,39 @@ const getAllMailerList = async () => {
   });
 };
 
+const createMailCampaign = async (body) => {
+  return new Promise(async (resolve, reject) => {
+    var {campaign_name, email, htmlContent, listIds, name, replyTo, scheduledAt, subject} = body;
+    try {
+      var result = await axios.post('https://api.sendinblue.com/v3/emailCampaigns', {
+        sender: {
+          name: name,
+          email: email
+        },
+        recipients: {
+          listIds: [listIds.value] //TO_DO can select mutliple campaign
+        },
+        inlineImageActivation: false,
+        sendAtBestTime: false, //Send in blue recommendation
+        abTesting: false,
+        ipWarmupEnable: false, //Priming the email ID
+        name: campaign_name,
+        htmlContent: htmlContent,
+        scheduledAt: new Date(scheduledAt).toISOString(), //ISO format to get more accurate results
+        subject: subject,
+        replyTo: replyTo
+      });
+      return resolve(result);
+    } catch (err) {
+      console.log('setMailerList -> err', err);
+      return reject(err);
+      // Loose End
+    }
+  });
+};
+
 module.exports = {
   setMailerList,
-  getAllMailerList
+  getAllMailerList,
+  createMailCampaign
 };
