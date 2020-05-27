@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getUsers} from '../../Actions/ActivityActions';
+// import {getUsers} from '../../Actions/ActivityActions';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import CreateMailList from '../CreateMailList';
@@ -11,7 +11,7 @@ class DashBoard extends React.Component {
     users: []
   };
   componentDidMount() {
-    this.props.dispatch(getUsers());
+    // this.props.dispatch(getUsers());
   }
   componentDidUpdate(prevProps, currentProps) {
     if (prevProps.users !== this.props.users) {
@@ -43,7 +43,7 @@ class DashBoard extends React.Component {
 
 function withStateToProps(state) {
   return {
-    users: state.activity.users
+    users: null
   };
 }
 
