@@ -38,4 +38,6 @@ router.post(
   sendInBlueController.createCampaign
 );
 
+router.get('/sendinblue/get_campaigns', sendInBlueController.getCampaigns);
+
 module.exports = router;

@@ -1,6 +1,10 @@
-.stick-bottom {
-  position: sticky;
-  width: 100%;
+.footer {
+ position: fixed;
+  left: 0;
   bottom: 0;
-  display: none;
+  width: 100%;
+  text-align: center;
+  background: white;
+  color: black;
+  padding-top: 15px;
 }

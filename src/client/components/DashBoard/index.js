@@ -5,6 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import CreateMailList from '../CreateMailList';
 import CreateCampaign from '../CreateCampaign';
+import Analytics from '../Analytics';
 class DashBoard extends React.Component {
   state = {
     users: []
@@ -22,13 +23,16 @@ class DashBoard extends React.Component {
   render() {
     return (
       <div className="container mt-5 mb-5 grey-bg">
-        <div className="white-bg br-5 p-3">
-          <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-            <Tab eventKey="create_mail_list" title="1. Create Mail List">
+        <div className="white-bg br-5 p-3 mb-5">
+          <Tabs defaultActiveKey="create_mail_list" id="uncontrolled-tab-example">
+            <Tab eventKey="create_mail_list" title="Create Mail List">
               <CreateMailList />
             </Tab>
-            <Tab eventKey="create_campaign" title="2. Create Campaign & Schedule">
+            <Tab eventKey="create_campaign" title="Create Campaign & Schedule">
               <CreateCampaign />
+            </Tab>
+            <Tab eventKey="Analytics & Reports" title="Campaign Analytics">
+              <Analytics />
             </Tab>
           </Tabs>
         </div>

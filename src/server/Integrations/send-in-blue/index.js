@@ -64,8 +64,22 @@ const createMailCampaign = async (body) => {
   });
 };
 
+const getCampaignsList = async () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      //TO_DO limit and offset should not be hardcoded
+      var result = await axios.get('https://api.sendinblue.com/v3/emailCampaigns?limit=500&offset=0');
+      return resolve(result.data);
+    } catch (err) {
+      console.log('getCampainsList -> err', err);
+      return reject(err);
+      // Loose End
+    }
+  });
+};
 module.exports = {
   setMailerList,
   getAllMailerList,
-  createMailCampaign
+  createMailCampaign,
+  getCampaignsList
 };

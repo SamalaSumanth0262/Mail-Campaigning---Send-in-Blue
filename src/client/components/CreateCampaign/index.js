@@ -68,7 +68,6 @@ class CreateCampaign extends React.Component {
 
   render() {
     const renderView = (props) => {
-      console.log('renderView -> props', props);
       return (
         <form onSubmit={props.handleSubmit}>
           <div className="p-2 pt-3">

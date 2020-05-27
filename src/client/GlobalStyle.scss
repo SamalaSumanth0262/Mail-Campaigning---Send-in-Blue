@@ -1,7 +1,6 @@
 @import '../client/assets/variables';
-
-html, body{
-  background: $gray;
+body{
+  background: #6f74727a !important;
 }
 .Toastify__toast--success {
   background: $green !important;
@@ -13,6 +12,9 @@ html, body{
   
 }
 
+.bg-light {
+  // background: 
+}
 .white-bg {
   background-color: $bright;
 }

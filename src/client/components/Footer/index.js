@@ -1,10 +1,10 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react';
+import './styles.scss';
 class Footer extends React.Component {
   render() {
     return (
-      <div class="card text-center stick-bottom">
-        <div class="card-header">Copyright &copy; Samala Sumanth</div>
+      <div class="footer">
+        <p>Samala Sumanth &copy; MIT license</p>
       </div>
     );
   }

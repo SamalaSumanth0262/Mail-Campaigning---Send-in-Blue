@@ -1,6 +1,6 @@
 // const { createUserInMongo, loginUserMongo } = require("../db/user_collection");
 const {formatResponse} = require('../utlis/helper');
-const {setMailerList, getAllMailerList, createMailCampaign} = require('../Integrations/send-in-blue');
+const {setMailerList, getAllMailerList, createMailCampaign, getCampaignsList} = require('../Integrations/send-in-blue');
 const createMailerList = async (req, res, next) => {
   try {
     var {listName, folderId, fileUrl} = req.body;
@@ -25,18 +25,27 @@ const getAllList = async (req, res, next) => {
 
 const createCampaign = async (req, res, next) => {
   try {
-    // var {campaign_name, email, htmlContent, listIds, value, name, replyTo, scheduledAt, subject} = req.body;
     var result = await createMailCampaign(req.body);
     return res.status(200).json(formatResponse(200, null, result.data, null));
   } catch (err) {
     console.log('createCampaign -> err', err);
-    console.log('createCampaign -> data', err);
     return res.status(400).json(formatResponse(400, err, null, err.response.data));
+  }
+};
+
+const getCampaigns = async (req, res, next) => {
+  try {
+    var result = await getCampaignsList();
+    return res.status(200).json(formatResponse(200, null, result, null));
+  } catch (err) {
+    console.log('getAllList -> err', err);
+    return res.status(400).json(formatResponse(400, err));
   }
 };
 
 module.exports = {
   createMailerList,
   getAllList,
-  createCampaign
+  createCampaign,
+  getCampaigns
 };
