@@ -60,7 +60,7 @@ class Analytics extends React.Component {
               var camp_stats = campaign.statistics.campaignStats[0];
               return (
                 <tr>
-                  <th scope="row">{campaign.name}</th>
+                  <td style={{color: '#16c98d', fontWeight: 'light'}}>{campaign.name}</td>
                   <td>{campaign.status}</td>
                   <td>{campaign.subject}</td>
                   <td>{campaign.scheduledAt ? new Date(campaign.scheduledAt).toLocaleString() : '-'}</td>
