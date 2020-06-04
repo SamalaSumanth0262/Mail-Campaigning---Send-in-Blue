@@ -10,7 +10,8 @@ import {toast} from 'react-toastify';
 axios.interceptors.request.use(
   async (config) => {
     config.headers['api-key'] =
-      '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';
+      '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';
+    // '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';
     return config;
   },
   (error) => {

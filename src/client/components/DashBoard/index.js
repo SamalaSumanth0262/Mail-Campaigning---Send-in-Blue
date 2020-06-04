@@ -24,7 +24,7 @@ class DashBoard extends React.Component {
     return (
       <div className="container mt-5 mb-5 grey-bg">
         <div className="white-bg br-5 p-3 mb-5">
-          <Tabs defaultActiveKey="create_mail_list" id="uncontrolled-tab-example">
+          <Tabs defaultActiveKey="create_campaign" id="uncontrolled-tab-example">
             <Tab eventKey="create_mail_list" title="Create Mail List">
               <CreateMailList />
             </Tab>

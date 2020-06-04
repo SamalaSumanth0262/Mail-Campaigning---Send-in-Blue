@@ -8,6 +8,7 @@ import {getAllMailerList, createCampaign} from './client';
 import {toast} from 'react-toastify';
 import DropDown from '../Formik/DropDown';
 import CkEditor from '../Formik/CkEditor';
+import CampaignTable from '../CampaignTable';
 const campaignSchema = Yup.object().shape({
   name: Yup.string().required('Sender name is required'),
   email: Yup.string()
@@ -71,7 +72,7 @@ class CreateCampaign extends React.Component {
       return (
         <form onSubmit={props.handleSubmit}>
           <div className="p-2 pt-3">
-            <div className="row align-items-end">
+            <div className="row">
               <div className="col-sm-6">
                 <TextInput
                   type="text"
@@ -126,7 +127,12 @@ class CreateCampaign extends React.Component {
                   data-date-format="DD-MM-YYYY HH:mm:ss"
                 />
               </div>
-              <div className="offset-md-3 col-sm-3">
+              <div className="col-sm-6">
+                <CampaignTable />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-3">
                 <Button type="submit" text="Create Campaign" isSpinning={props.isSubmitting} />
               </div>
             </div>
