@@ -9,6 +9,7 @@ import {toast} from 'react-toastify';
 import DropDown from '../Formik/DropDown';
 import CkEditor from '../Formik/CkEditor';
 import CampaignTable from '../CampaignTable';
+import {connect} from 'react-redux';
 const campaignSchema = Yup.object().shape({
   name: Yup.string().required('Sender name is required'),
   email: Yup.string()
@@ -28,7 +29,7 @@ class CreateCampaign extends React.Component {
   state = {
     initialValues: {
       name: '',
-      email: '',
+      email: 'vitatom2018@gmail.com',
       listIds: '',
       campaign_name: '',
       subject: '',
@@ -61,10 +62,31 @@ class CreateCampaign extends React.Component {
   async handleSubmitForm({values, actions}) {
     actions.setSubmitting(true);
     var result = await createCampaign(values);
-    console.log('CreateCampaign -> handleSubmitForm -> result', result);
     actions.setSubmitting(false);
     actions.resetForm();
     toast.success('Campaign Created & Scheduled Successfully..');
+  }
+
+  setIntialValues = (campaign) => {
+    var initialValues = {};
+    initialValues['name'] = campaign.sender.name;
+    initialValues['email'] = campaign.sender.email;
+    initialValues['campaign_name'] = campaign.name;
+    initialValues['subject'] = campaign.subject;
+    initialValues['replyTo'] = campaign.replyTo;
+    initialValues['htmlContent'] = campaign.htmlContent;
+    initialValues['scheduledAt'] = '';
+    initialValues['listIds'] = '';
+    return initialValues;
+  };
+
+  componentDidUpdate(prevProps, currenProps) {
+    if (prevProps.cloneFlag !== this.props.cloneFlag) {
+      var initialValues = this.setIntialValues(this.props.currentCampaign);
+      // var initialValues = {};
+      // initialValues['name'] = 'Sumanth';
+      this.setState({initialValues});
+    }
   }
 
   render() {
@@ -87,6 +109,7 @@ class CreateCampaign extends React.Component {
                   placeholder="Email"
                   labelTitle="Please Enter Sender Email ( From Address )"
                   isMandatory={true}
+                  disabled={true}
                 />
                 <DropDown
                   split={false}
@@ -140,8 +163,10 @@ class CreateCampaign extends React.Component {
         </form>
       );
     };
+    console.log('render -> this.state', this.state);
     return (
       <Formik
+        enableReinitialize
         initialValues={this.state.initialValues}
         render={renderView}
         validationSchema={campaignSchema}
@@ -152,5 +177,11 @@ class CreateCampaign extends React.Component {
     );
   }
 }
-
-export default CreateCampaign;
+const mapStateToProps = (state) => {
+  console.log('mapStateToProps -> state', state);
+  return {
+    currentCampaign: state.campaign.currentCampaign,
+    cloneFlag: state.campaign.cloneFlag
+  };
+};
+export default connect(mapStateToProps)(CreateCampaign);

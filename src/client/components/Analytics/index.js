@@ -54,32 +54,34 @@ class Analytics extends React.Component {
               <th scope="col">viewed</th>
             </tr>
           </thead>
-          <tbody>
-            {data.campaigns.map((campaign) => {
-              var camp_stats_available = campaign.statistics.campaignStats && campaign.statistics.campaignStats[0];
-              var camp_stats = campaign.statistics.campaignStats[0];
-              return (
-                <tr>
-                  <td style={{color: '#16c98d', fontWeight: 'light'}}>{campaign.name}</td>
-                  <td>{campaign.status}</td>
-                  <td>{campaign.subject}</td>
-                  <td>{campaign.scheduledAt ? new Date(campaign.scheduledAt).toLocaleString() : '-'}</td>
-                  <td>{campaign.sentDate ? new Date(campaign.sentDate).toLocaleString() : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.clickers : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.complaints : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.delivered : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.sent : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.complaints : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.sent : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.softBounces : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.uniqueClicks : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.uniqueViews : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.unsubscriptions : '-'}</td>
-                  <td>{camp_stats_available ? camp_stats.viewed : '-'}</td>
-                </tr>
-              );
-            })}
-          </tbody>
+          {data.campaigns && (
+            <tbody>
+              {data.campaigns.map((campaign) => {
+                var camp_stats_available = campaign.statistics.campaignStats && campaign.statistics.campaignStats[0];
+                var camp_stats = campaign.statistics.campaignStats[0];
+                return (
+                  <tr>
+                    <td style={{color: '#16c98d', fontWeight: 'light'}}>{campaign.name}</td>
+                    <td>{campaign.status}</td>
+                    <td>{campaign.subject}</td>
+                    <td>{campaign.scheduledAt ? new Date(campaign.scheduledAt).toLocaleString() : '-'}</td>
+                    <td>{campaign.sentDate ? new Date(campaign.sentDate).toLocaleString() : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.clickers : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.complaints : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.delivered : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.sent : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.complaints : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.sent : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.softBounces : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.uniqueClicks : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.uniqueViews : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.unsubscriptions : '-'}</td>
+                    <td>{camp_stats_available ? camp_stats.viewed : '-'}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          )}
         </table>
       </div>
     );

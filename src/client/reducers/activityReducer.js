@@ -1,7 +1,18 @@
+import {CLONE_CAMPAIGN} from '../Actions/types';
 const initialState = {
-  authenticated: false,
-  loginTryCount: 0,
-  users: []
+  currentCampaign: {},
+  cloneFlag: 0
 };
 
-export default function(state = initialState, action) {}
+export default function(state = initialState, action) {
+  switch (action.type) {
+    case CLONE_CAMPAIGN:
+      return {
+        ...state,
+        currentCampaign: action.payload,
+        cloneFlag: state.cloneFlag + 1
+      };
+    default:
+      return state;
+  }
+}

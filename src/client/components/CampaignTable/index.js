@@ -2,6 +2,8 @@ import React from 'react';
 import './styles.scss';
 import {getCampaigns} from './client';
 import Button from '../common/Button';
+import {connect} from 'react-redux';
+import {cloneCampaign} from '../../Actions/ActivityActions';
 class CampaignTable extends React.Component {
   state = {
     isLoading: true,
@@ -21,13 +23,14 @@ class CampaignTable extends React.Component {
       console.log('CampaignTable -> componentDidMount -> err, Terribly went wrong NMI', err);
     }
   }
+  cloneCampaign = (campaign) => {
+    this.props.dispatch(cloneCampaign(campaign));
+  };
   render() {
     const {isLoading} = this.state;
     if (isLoading) {
       return <div>Sumant is Laoding....</div>;
     }
-    var {campaigns} = this.state;
-    console.log('render -> campaigns', campaigns);
     return (
       <div className="campaignContainer">
         <table class="table">
@@ -39,26 +42,41 @@ class CampaignTable extends React.Component {
               <th scope="col">Delete</th>
             </tr>
           </thead>
-          <tbody>
-            {this.state.campaigns.map((campaign, index) => {
-              return (
-                <tr>
-                  <th scope="row">{index + 1}</th>
-                  <td>{campaign.name}</td>
-                  <td>
-                    <Button className="btn btn-info btn-sm" text="Clone" type="button" />
-                  </td>
-                  <td>
-                    <Button className="btn btn-warning btn-sm" text="Delete" type="button" />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
+          {this.state.campaigns && (
+            <tbody>
+              {this.state.campaigns.map((campaign, index) => {
+                return (
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{campaign.name}</td>
+                    <td>
+                      <Button
+                        className="btn btn-info btn-sm"
+                        text="Clone"
+                        type="button"
+                        onClick={() => {
+                          this.cloneCampaign(campaign);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <Button className="btn btn-warning btn-sm" text="Delete" type="button" />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          )}
         </table>
       </div>
     );
   }
 }
 
-export default CampaignTable;
+const mapStateToProps = (state) => {
+  return {
+    just_nothing: null
+  };
+};
+
+export default connect(mapStateToProps)(CampaignTable);

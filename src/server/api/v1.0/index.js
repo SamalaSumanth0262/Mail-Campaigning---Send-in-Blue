@@ -3,9 +3,9 @@ const validate = require('express-validation');
 const {formatResponse} = require('../../utlis/helper');
 const axios = require('axios');
 axios.defaults.headers.post['api-key'] =
-  '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';
+  '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';
 axios.defaults.headers.get['api-key'] =
-  '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'; //TO_DO: get this from production.json // for POST requests
+  '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'; //TO_DO: get this from production.json // for POST requests
 
 var router = express.Router();
 
